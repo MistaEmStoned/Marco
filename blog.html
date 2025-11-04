@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marco's Blog</title>
+  <meta name="description" content="A simple personal blog template. Edit posts in the browser.">
+  <style>
+    :root{--max:1000px;--accent:#2563eb;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;margin:0;color:#111;background:#f7f7f8}
+    .wrap{max-width:var(--max);margin:28px auto;padding:18px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px}
+    nav a{margin-left:14px;color:var(--muted);text-decoration:none;font-weight:600}
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:18px}
+    .card{background:white;border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+    .post{margin-bottom:14px}
+    .post h3{margin:0 0 6px 0}
+    .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
+    .excerpt{color:#374151;font-size:15px;line-height:1.45}
+    .sidebar h4{margin-top:0}
+    .new-post{display:flex;flex-direction:column;gap:8px}
+    input[type=text],textarea{width:100%;padding:10px;border:1px solid #e6e7ea;border-radius:8px;font-size:14px}
+    button{background:var(--accent);color:white;border:0;padding:10px 12px;border-radius:8px;font-weight:700;cursor:pointer}
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{background:#eef2ff;color:#1e3a8a;padding:6px 8px;border-radius:999px;font-size:13px}
+    @media (max-width:880px){.hero{grid-template-columns:1fr}.logo{width:48px;height:48px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">MS</div>
+        <div>
+          <div style="font-weight:800;font-size:18px">Marco Sarmiento</div>
+          <div style="color:var(--muted);font-size:13px">Notes on code, study, life</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <section>
+        <div class="card" id="posts">
+          <h2 style="margin-top:0">Latest posts</h2>
+          <!-- Posts will render here -->
+        </div>
+
+        <div style="height:20px"></div>
+
+        <div class="card">
+          <h3 style="margin:0 0 8px 0">Quick tips</h3>
+          <ul style="margin:0;padding-left:18px;color:#374151">
+            <li>Use short titles.</li>
+            <li>Write one idea per paragraph.</li>
+            <li>Save drafts in your browser.</li>
+          </ul>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <div class="card">
+          <h4>New post</h4>
+          <div class="new-post">
+            <input id="title" type="text" placeholder="Post title">
+            <textarea id="content" rows="6" placeholder="Write your post here"></textarea>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="tagInput" type="text" placeholder="Comma separated tags" style="flex:1">
+              <button id="saveBtn">Publish</button>
+            </div>
+            <div style="font-size:13px;color:var(--muted);margin-top:8px">Posts save to your browser storage. No server required.</div>
+          </div>
+        </div>
+
+        <div style="height:14px"></div>
+
+        <div class="card">
+          <h4>About</h4>
+          <p style="margin:0;color:#374151;font-size:14px">A compact blog template for study notes, project logs, and short essays.</p>
+          <div class="tags" id="tags"></div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="card" style="display:inline-block;padding:10px 14px;border-radius:10px">Built with plain HTML and JavaScript</div>
+      <div style="margin-top:10px">© <span id="year"></span> Marco Sarmiento</div>
+    </footer>
+  </div>
+
+  <script>
+    const storageKey = 'ms.blog.posts.v1'
+    const postsEl = document.getElementById('posts')
+    const titleEl = document.getElementById('title')
+    const contentEl = document.getElementById('content')
+    const tagInput = document.getElementById('tagInput')
+    const tagsEl = document.getElementById('tags')
+    const yearEl = document.getElementById('year')
+    yearEl.textContent = new Date().getFullYear()
+
+    function uid(){return Math.random().toString(36).slice(2,9)}
+
+    function loadPosts(){
+      const raw = localStorage.getItem(storageKey)
+      try{ return raw ? JSON.parse(raw) : samplePosts() } catch(e){ return samplePosts() }
+    }
+
+    function savePosts(list){ localStorage.setItem(storageKey, JSON.stringify(list)) }
+
+    function samplePosts(){
+      return [
+        {id:uid(),title:'Study plan for logic exam',date:'2025-11-05',excerpt:'Break topics into 30 minute blocks. Practice with past questions.',content:'Full notes go here.',tags:['study','exam']},
+        {id:uid(),title:'How I built a small project',date:'2025-10-28',excerpt:'Start small, focus on core features, ship a prototype.',content:'Project writeup here.',tags:['project','code']}
+      ]
+    }
+
+    function render(){
+      const list = loadPosts()
+      postsEl.innerHTML = '<h2 style="margin-top:0">Latest posts</h2>'
+      list.forEach(p=>{
+        const wrap = document.createElement('article')
+        wrap.className = 'post card'
+        wrap.innerHTML = `
+          <h3>${escapeHtml(p.title)}</h3>
+          <div class="meta">${p.date} · ${p.tags.join(', ')}</div>
+          <div class="excerpt">${escapeHtml(p.excerpt || p.content.slice(0,160))}</div>
+          <div style="margin-top:8px"><button data-id="${p.id}" class="open">Read</button> <button data-id="${p.id}" class="del" style="background:#ef4444">Delete</button></div>
+        `
+        postsEl.appendChild(wrap)
+      })
+      renderTags(list)
+    }
+
+    function renderTags(list){
+      const set = new Set()
+      list.forEach(p=>p.tags.forEach(t=>set.add(t)))
+      tagsEl.innerHTML = ''
+      Array.from(set).slice(0,8).forEach(t=>{
+        const el = document.createElement('div')
+        el.className = 'tag'
+        el.textContent = t
+        tagsEl.appendChild(el)
+      })
+    }
+
+    function escapeHtml(s){return String(s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+    document.getElementById('saveBtn').addEventListener('click',()=>{
+      const t = titleEl.value.trim()
+      const c = contentEl.value.trim()
+      const rawTags = tagInput.value.split(',').map(x=>x.trim()).filter(Boolean)
+      if(!t || !c){ alert('Title and content required') ; return }
+      const list = loadPosts()
+      const post = {id:uid(),title:t,date:new Date().toISOString().slice(0,10),excerpt:c.slice(0,160),content:c,tags:rawTags}
+      list.unshift(post)
+      savePosts(list)
+      titleEl.value='';contentEl.value='';tagInput.value=''
+      render()
+    })
+
+    postsEl.addEventListener('click',e=>{
+      const id = e.target.dataset.id
+      if(!id) return
+      if(e.target.classList.contains('del')){
+        const list = loadPosts().filter(p=>p.id!==id)
+        savePosts(list)
+        render()
+        return
+      }
+      if(e.target.classList.contains('open')){
+        const post = loadPosts().find(p=>p.id===id)
+        if(!post) return
+        showModal(post)
+      }
+    })
+
+    function showModal(p){
+      const modal = document.createElement('div')
+      modal.style.position='fixed'
+      modal.style.inset=0
+      modal.style.display='flex'
+      modal.style.alignItems='center'
+      modal.style.justifyContent='center'
+      modal.style.background='rgba(0,0,0,0.4)'
+      modal.innerHTML = `
+        <div style="max-width:720px;width:92%;background:white;border-radius:12px;padding:18px;box-shadow:0 10px 30px rgba(2,6,23,0.3)">
+          <h2 style="margin-top:0">${escapeHtml(p.title)}</h2>
+          <div style="color:var(--muted);margin-bottom:8px">${p.date} · ${p.tags.join(', ')}</div>
+          <div style="color:#111;font-size:15px;line-height:1.6">${escapeHtml(p.content).replace(/\n/g,'<br>')}</div>
+          <div style="text-align:right;margin-top:16px"><button id="closeModal">Close</button></div>
+        </div>
+      `
+      document.body.appendChild(modal)
+      document.getElementById('closeModal').addEventListener('click',()=>modal.remove())
+    }
+
+    render()
+  </script>
+</body>
+</html>

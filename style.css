@@ -1,0 +1,383 @@
+body {
+  background-color: #373543;
+  margin: 0.5;
+  
+}
+
+#header {
+  background-color: #282830;
+  padding: 10px 20px;
+}
+
+#logo-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px; 
+}
+
+#logo-nav img {
+  width: 60px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#home{
+    text-align: left;
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    background-color: #282830;
+}
+        /* Layout logic using Flexbox */
+.container {
+  display: flex; 
+  justify-content: space-between; 
+  width: 100%;
+  height: auto;
+  padding: 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  gap: 16px;
+}
+        
+        /* Base styles for the two child boxes */
+.box {
+  width: 75%; 
+  height: auto;
+  padding: 20px;
+  color: white;
+  border-radius: 8px;
+  box-sizing: border-box; /* Crucial for making 50% width accurate */
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+        
+#left {
+  background-color: #373543;
+}
+
+#left img{
+  width: 100%;
+}
+        
+#right {
+   background-image: url(images/rblgtnd.jpg);
+}
+
+#right img{
+  width: 80%;
+}
+
+.bxs {
+  width: 75%; 
+  height: auto;
+  padding: 20px;
+  color: white;
+  border-radius: 8px;
+  box-sizing: border-box;
+  text-align: left;
+  border: 3px solid #1C6EA4;
+}
+
+
+    /* PORTFOLIO SECTION */
+#portfolio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 60px 20px;
+  background: url(images/bkrnd.jpg) center/cover no-repeat;
+  color: white;
+}
+
+#portfolio h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #f5f5f5;
+}
+
+.project-card {
+  background-color: rgba(40, 40, 48, 0.95);
+  width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.project-card .info {
+  padding: 16px;
+}
+
+.project-card .info h3 {
+  font-size: 1.2rem;
+  margin: 0 0 10px;
+}
+
+.project-card .info p {
+  font-size: 0.9rem;
+  color: #d1d5db;
+}
+
+/* TESTIMONIALS SECTION */
+#testimonials {
+  background-color: #282830;
+  padding: 60px 20px;
+  color: white;
+  text-align: center;
+}
+
+#testimonials h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.testimonial {
+  max-width: 600px;
+  margin: 0 auto 24px;
+  background-color: #373543;
+  padding: 24px;
+  border-radius: 10px;
+  border-left: 4px solid #1C6EA4;
+  text-align: left;
+}
+
+.testimonial p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #e5e7eb;
+}
+
+.testimonial .author {
+  margin-top: 12px;
+  font-weight: bold;
+  color: #60a5fa;
+}
+
+/* ABOUT SECTION */
+#about {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 60px 20px;
+  background-color: #373543;
+  color: white;
+}
+
+#about img {
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+#about .content {
+  max-width: 500px;
+}
+
+#about .content h2 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+#about .content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #e5e7eb;
+}
+
+#portfolio{
+  align-items: flex-start;
+  text-align: left;
+  width: 795;
+  background-image: url(images/bkrnd.jpg);
+  gap: 16px;
+}
+
+.project-card a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-card a:hover .info h3 {
+  color: #60a5fa;
+}
+
+
+#testimonials{
+  background-color: #282830;
+  gap: 16px;
+}
+
+#about{
+  height:795;
+  gap: 16px;
+}
+
+/* DOWNLOAD RESUME BUTTON */
+.resume-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #1C6EA4;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.resume-btn:hover {
+  background-color: #155b84;
+  transform: translateY(-2px);
+}
+
+/* CONTACT SECTION */
+#contact {
+  background-color: #282830;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+#contact h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+#contact p {
+  margin-bottom: 30px;
+  color: #d1d5db;
+}
+
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-info {
+  text-align: left;
+  font-size: 1rem;
+}
+
+.contact-info a {
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 12px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #373543;
+  color: white;
+  font-size: 0.95rem;
+}
+
+.contact-form button {
+  background-color: #1C6EA4;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.contact-form button:hover {
+  background-color: #155b84;
+  transform: translateY(-2px);
+}
+
+
+/* FOOTER */
+#footer {
+  background-color: #282830;
+  color: #e5e7eb;
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 40px;
+}
+
+#footer h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: #60a5fa;
+}
+
+#footer p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.footer-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #60a5fa;
+}
+
+.footer-copy {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
