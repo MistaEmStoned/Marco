@@ -75,7 +75,10 @@ nav a {
 }
         
 #right {
-   background-image: url(images/rblgtnd.jpg);
+  background-image: url(images/mrkPkmn.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 #right img{
@@ -381,3 +384,4 @@ nav a {
   font-size: 0.85rem;
   color: #9ca3af;
 }
+
