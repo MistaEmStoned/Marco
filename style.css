@@ -67,7 +67,10 @@ nav a {
 }
         
 #left {
-  background-color: #373543;
+  background-image: url(images/HI Im Marco.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 #left img{
@@ -384,4 +387,5 @@ nav a {
   font-size: 0.85rem;
   color: #9ca3af;
 }
+
 
